@@ -1,7 +1,9 @@
 import { env } from '../config/env'
 import { site } from '../config/site'
 import { useCatalog } from '../state/catalog-context'
+import { UnblockHelp } from './UnblockHelp'
 import { Button, LinkButton } from './ui/Button'
+import { buttonClasses } from './ui/button-styles'
 import { Notice } from './ui/feedback'
 import { ExternalIcon } from './ui/icons'
 
@@ -39,6 +41,7 @@ export function StoreStatus({ className = '' }: { className?: string }) {
         actions={
           <>
             <Button onClick={retry}>Try again</Button>
+            {error?.kind === 'network' || error?.kind === 'timeout' ? <UnblockHelp className={buttonClasses('secondary')} /> : null}
             {storeLink}
           </>
         }
