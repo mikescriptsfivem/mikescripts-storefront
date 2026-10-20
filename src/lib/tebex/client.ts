@@ -68,7 +68,10 @@ export async function tebexRequest<T>(url: string, options: RequestOptions = {})
     if (controller.signal.aborted) {
       throw new TebexError('timeout', 'Tebex took too long to respond. Please try again.')
     }
-    throw new TebexError('network', 'Could not reach Tebex. Check your connection and try again.')
+    throw new TebexError(
+      'network',
+      'Could not reach Tebex. Check your connection and try again. A VPN, ad blocker or privacy extension blocking headless.tebex.io can also cause this.',
+    )
   } finally {
     clearTimeout(timer)
     options.signal?.removeEventListener('abort', forwardAbort)

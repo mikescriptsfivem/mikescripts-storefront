@@ -5,6 +5,7 @@ import { buildCatalog } from '../lib/catalog'
 import { readJson, writeJson } from '../lib/storage'
 import { TebexError } from '../lib/tebex/client'
 import { tebexApi } from '../lib/tebex/instance'
+import { withRetry } from '../lib/tebex/retry'
 import type { TebexCategory, TebexCmsPage, TebexWebstore } from '../lib/tebex/types'
 import { CatalogContext, type CatalogContextValue } from './catalog-context'
 
@@ -30,8 +31,10 @@ function readCache(): RawCatalog | null {
 
 async function fetchCatalog(signal: AbortSignal): Promise<RawCatalog> {
   if (!tebexApi) throw new TebexError('invalid-response', 'The store is not connected.')
+  const api = tebexApi
   const [categories, webstore, pages] = await Promise.all([
-    tebexApi.getCategoriesWithPackages(signal),
+    // Brief outages and rate limits are retried before the visitor sees an error.
+    withRetry(() => api.getCategoriesWithPackages(signal), { signal }),
     tebexApi.getWebstore(signal).catch(() => null),
     tebexApi.getPages(signal).catch(() => [] as TebexCmsPage[]),
   ])
@@ -67,6 +70,19 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
     setError(null)
     setAttempt((value) => value + 1)
   }, [])
+
+  // After a failure, try again by itself when the connection returns or the visitor comes back to the tab.
+  useEffect(() => {
+    if (!error) return
+    const onOnline = () => retry()
+    const onVisible = () => document.visibilityState === 'visible' && retry()
+    window.addEventListener('online', onOnline)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('online', onOnline)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [error, retry])
 
   const value = useMemo<CatalogContextValue>(() => {
     if (!tebexApi) {
