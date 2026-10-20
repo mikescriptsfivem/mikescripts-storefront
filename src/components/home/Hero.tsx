@@ -18,7 +18,7 @@ export function Hero() {
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-ink-950 to-transparent" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-ink-950/80 to-transparent" />
 
-      <Container className="pb-16 pt-36 sm:pb-24 lg:pb-32">
+      <Container className="pb-16 pt-48 sm:pb-24 lg:pb-32">
         <div className="max-w-3xl animate-fade-up">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
           <h1 className="mt-6 text-balance font-display text-[clamp(3.4rem,9vw,7.75rem)] font-bold uppercase leading-[0.86] tracking-[0.005em] text-white">

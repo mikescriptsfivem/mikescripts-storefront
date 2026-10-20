@@ -161,7 +161,10 @@ export function BasketProvider({ children }: { children: ReactNode }) {
         }
       } catch (error) {
         if (cancelled) return
-        setMessage({ tone: 'error', text: `Your basket could not be loaded. ${errorText(error)}` })
+        // Network problems are shown by the catalogue; only report real Tebex answers here.
+        if (isTebexError(error) && error.kind === 'http') {
+          setMessage({ tone: 'error', text: `Your basket could not be loaded. ${errorText(error)}` })
+        }
       }
       if (cancelled) return
       setBasket(restored)

@@ -87,7 +87,7 @@ function GuideView({ guide }: { guide: DocGuide }) {
       <Container className="py-14 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-[220px_1fr] lg:gap-16">
           <nav aria-label="On this page" className="hidden lg:block">
-            <ul className="sticky top-28 space-y-1 border-l border-ink-700">
+            <ul className="sticky top-40 space-y-1 border-l border-ink-700">
               {guide.sections.map((section) => (
                 <li key={section.heading}>
                   <a href={`#${slugify(section.heading)}`} className="-ml-px block border-l border-transparent py-1.5 pl-4 text-sm text-mist-400 hover:border-mist-400 hover:text-white">
@@ -100,7 +100,7 @@ function GuideView({ guide }: { guide: DocGuide }) {
           <article className="min-w-0 max-w-3xl">
             {guide.sections.map((section) => (
               <section key={section.heading} className="border-t border-ink-700 py-10 first:border-t-0 first:pt-0">
-                <h2 id={slugify(section.heading)} className="scroll-mt-28 font-display text-3xl font-semibold uppercase tracking-wide text-white">
+                <h2 id={slugify(section.heading)} className="scroll-mt-40 font-display text-3xl font-semibold uppercase tracking-wide text-white">
                   {section.heading}
                 </h2>
                 <div className="mt-5 space-y-5">

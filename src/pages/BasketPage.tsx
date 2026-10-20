@@ -21,7 +21,7 @@ export default function BasketPage() {
             <div className="overflow-hidden rounded-lg border border-ink-700 bg-ink-900">
               <BasketItems />
             </div>
-            <aside className="h-fit rounded-lg border border-ink-700 bg-ink-900 p-6 lg:sticky lg:top-28">
+            <aside className="h-fit rounded-lg border border-ink-700 bg-ink-900 p-6 lg:sticky lg:top-40">
               <BasketSummary />
             </aside>
           </div>

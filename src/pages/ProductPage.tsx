@@ -23,7 +23,7 @@ import NotFoundPage from './NotFoundPage'
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={`${id}-heading`} className="scroll-mt-28 border-t border-ink-700 py-12 first:border-t-0 first:pt-0">
+    <section aria-labelledby={`${id}-heading`} className="scroll-mt-40 border-t border-ink-700 py-12 first:border-t-0 first:pt-0">
       <h2 id={`${id}-heading`} className="font-display text-3xl font-semibold uppercase tracking-wide text-white">
         {title}
       </h2>
@@ -46,7 +46,7 @@ function CheckList({ items }: { items: string[] }) {
 }
 
 function ProductDetails({ product }: { product: Product }) {
-  const { catalog } = useCatalog()
+  const { catalog, snapshotAt } = useCatalog()
   const basket = useBasket()
   const content = product.content
   const description = useMemo(() => enhanceDescription(sanitizeHtml(product.descriptionHtml)), [product.descriptionHtml])
@@ -69,7 +69,7 @@ function ProductDetails({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="border-b border-ink-700 bg-ink-900 pb-14 pt-28 sm:pt-32">
+      <div className="border-b border-ink-700 bg-ink-900 pb-14 pt-40 sm:pt-44">
         <Container>
           <nav aria-label="Breadcrumb" className="mb-8 text-sm text-mist-500">
             <ol className="flex flex-wrap items-center gap-2">
@@ -122,7 +122,7 @@ function ProductDetails({ product }: { product: Product }) {
               </div>
 
               <ul className="mt-6 space-y-2 text-sm text-mist-400">
-                {!basket.isAuthorized && !product.requiresInput ? (
+                {!basket.isAuthorized && !product.requiresInput && !snapshotAt ? (
                   <li className="flex gap-2.5">
                     <CheckIcon size={16} className="mt-0.5 shrink-0 text-accent-400" />
                     You’ll log in with your Cfx.re account first. The script is delivered to that account.
@@ -157,7 +157,7 @@ function ProductDetails({ product }: { product: Product }) {
         <div className="grid gap-12 lg:grid-cols-[220px_1fr] lg:gap-16">
           {sections.length > 1 ? (
             <nav aria-label="On this page" className="hidden lg:block">
-              <ul className="sticky top-28 space-y-1 border-l border-ink-700">
+              <ul className="sticky top-40 space-y-1 border-l border-ink-700">
                 {sections.map((section) => (
                   <li key={section.id}>
                     <a href={`#${section.id}-heading`} className="-ml-px block border-l border-transparent py-1.5 pl-4 text-sm text-mist-400 hover:border-mist-400 hover:text-white">
@@ -347,7 +347,7 @@ export default function ProductPage() {
   }
 
   return (
-    <Container className="pb-24 pt-32">
+    <Container className="pb-24 pt-44">
       {status === 'loading' ? (
         <div role="status" className="grid gap-10 lg:grid-cols-[1.45fr_1fr]">
           <span className="sr-only">Loading script…</span>

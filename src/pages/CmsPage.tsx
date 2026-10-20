@@ -34,7 +34,7 @@ export default function CmsPage() {
     return page ? <CmsContent key={page.id} page={page} /> : <NotFoundPage />
   }
   return (
-    <Container className="pb-24 pt-36">
+    <Container className="pb-24 pt-48">
       {status === 'loading' ? (
         <div role="status" className="space-y-4">
           <span className="sr-only">Loading page…</span>

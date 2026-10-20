@@ -3,6 +3,7 @@ import { site } from '../../config/site'
 import type { Product } from '../../lib/catalog'
 import { tebexPackageUrl } from '../../lib/url'
 import { useBasket, type PurchaseIntent } from '../../state/basket-context'
+import { useCatalog } from '../../state/catalog-context'
 import { Button, LinkButton } from '../ui/Button'
 import { BasketIcon, CheckIcon, ExternalIcon } from '../ui/icons'
 
@@ -12,11 +13,12 @@ import { BasketIcon, CheckIcon, ExternalIcon } from '../ui/icons'
  */
 export function PurchaseActions({ product, compact = false }: { product: Product; compact?: boolean }) {
   const basket = useBasket()
+  const { snapshotAt } = useCatalog()
   const [clicked, setClicked] = useState<PurchaseIntent | null>(null)
   if (!basket.enabled) return null
 
-  if (product.requiresInput) {
-    // This package asks for details at purchase time, which only the Tebex store can collect.
+  if (product.requiresInput || snapshotAt) {
+    // The package asks for details only the Tebex store can collect, or Tebex's API is unreachable from this browser.
     return (
       <LinkButton to={tebexPackageUrl(site.links.store, product.id)} size={compact ? 'sm' : 'lg'} variant={compact ? 'secondary' : 'primary'}>
         Buy on Tebex

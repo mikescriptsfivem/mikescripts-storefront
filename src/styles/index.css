@@ -69,7 +69,7 @@
     background-color: var(--color-ink-950);
     color-scheme: dark;
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 9rem;
   }
 
   body {

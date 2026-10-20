@@ -145,6 +145,12 @@ for (const product of catalog?.products ?? []) {
   written.push(routePath)
 }
 
+// Fallback copy of the catalogue for visitors whose browser cannot reach headless.tebex.io
+// (VPNs, strict tracking prevention, security software). The site uses it only when the live request fails.
+if (categories) {
+  await writeFile(path.join(DIST, 'catalog-snapshot.json'), JSON.stringify({ generatedAt: new Date().toISOString(), categories }))
+}
+
 await writeFile(path.join(DIST, '.nojekyll'), '')
 if (siteUrl) {
   const indexable = ['', ...written.filter((routePath) => !STATIC_ROUTES.find((route) => route.path === routePath && route.noindex))]

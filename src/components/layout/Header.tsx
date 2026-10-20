@@ -5,6 +5,9 @@ import { useBasket } from '../../state/basket-context'
 import { Container } from '../ui/layout'
 import { BasketIcon, CloseIcon, DiscordIcon, MenuIcon, Spinner, UserIcon } from '../ui/icons'
 import { Brand } from './Brand'
+import { ServerBar } from './ServerBar'
+import { SnapshotNotice } from './SnapshotNotice'
+import { useCatalog } from '../../state/catalog-context'
 
 export const NAV_ITEMS = [
   { to: '/', label: 'Home', end: true },
@@ -16,7 +19,8 @@ export const NAV_ITEMS = [
 
 function AccountButton({ compact = false }: { compact?: boolean }) {
   const basket = useBasket()
-  if (!basket.enabled) return null
+  const { snapshotAt } = useCatalog()
+  if (!basket.enabled || snapshotAt) return null
   if (basket.isAuthorized) {
     return (
       <button
@@ -45,7 +49,8 @@ function AccountButton({ compact = false }: { compact?: boolean }) {
 
 function BasketButton() {
   const basket = useBasket()
-  if (!basket.enabled) return null
+  const { snapshotAt } = useCatalog()
+  if (!basket.enabled || snapshotAt) return null
   const count = basket.itemCount
   return (
     <button
@@ -104,6 +109,7 @@ export function Header() {
       >
         Skip to content
       </a>
+      <ServerBar />
       <Container className="flex h-[72px] items-center gap-4">
         <Brand onNavigate={closeMenu} />
 
@@ -145,8 +151,10 @@ export function Header() {
         </div>
       </Container>
 
+      <SnapshotNotice />
+
       {menuOpen ? (
-        <div id="mobile-menu" className="max-h-[calc(100dvh-72px)] overflow-y-auto border-t border-ink-700 bg-ink-950 lg:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100dvh-112px)] overflow-y-auto border-t border-ink-700 bg-ink-950 lg:hidden">
           <Container className="py-4">
             <nav aria-label="Mobile">
               <ul className="divide-y divide-ink-800">

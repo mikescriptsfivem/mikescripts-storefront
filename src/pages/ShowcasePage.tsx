@@ -25,7 +25,7 @@ function Gallery({ group }: { group: GalleryGroup }) {
   const close = useCallback(() => setOpen(null), [])
 
   return (
-    <section id={group.id} aria-labelledby={`${group.id}-heading`} className="scroll-mt-24 border-t border-ink-700 py-16 first:border-t-0 sm:py-20">
+    <section id={group.id} aria-labelledby={`${group.id}-heading`} className="scroll-mt-36 border-t border-ink-700 py-16 first:border-t-0 sm:py-20">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
           <h2 id={`${group.id}-heading`} className="font-display text-4xl font-semibold uppercase tracking-wide text-white sm:text-5xl">

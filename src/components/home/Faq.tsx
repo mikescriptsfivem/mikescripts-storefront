@@ -30,7 +30,7 @@ export function Faq() {
   return (
     <section aria-labelledby="faq-heading" className="py-24 sm:py-32">
       <Container className="grid items-start gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28">
+        <div className="lg:sticky lg:top-40">
           <SectionHeading id="faq-heading" eyebrow="FAQ" title="Questions & answers" description="Buying, downloading, installing and updating MikeScripts resources." />
         </div>
         <FaqList />

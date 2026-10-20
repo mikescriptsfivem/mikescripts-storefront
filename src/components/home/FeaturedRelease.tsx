@@ -11,7 +11,7 @@ import { Reveal } from '../ui/Reveal'
 
 /** Large editorial section for the product chosen in site.featuredRelease. Hidden unless it is live on Tebex. */
 export function FeaturedRelease() {
-  const { catalog } = useCatalog()
+  const { catalog, snapshotAt } = useCatalog()
   const basket = useBasket()
   const product = catalog?.byContentKey.get(site.featuredRelease)
   if (!product) return null
@@ -66,7 +66,7 @@ export function FeaturedRelease() {
           <div className="mt-10 flex flex-col gap-6 border-t border-ink-700 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <PriceTag price={product.price} type={product.type} size="lg" />
             <div className="flex flex-wrap gap-3">
-              {product.requiresInput ? (
+              {product.requiresInput || snapshotAt ? (
                 <LinkButton to={tebexPackageUrl(site.links.store, product.id)}>
                   Purchase on Tebex
                   <ExternalIcon size={16} />

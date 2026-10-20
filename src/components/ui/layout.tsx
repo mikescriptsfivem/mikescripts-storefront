@@ -64,7 +64,7 @@ export function PageHeader({
   footer?: ReactNode
 }) {
   return (
-    <header className="border-b border-ink-700 bg-ink-900 pb-12 pt-32 sm:pb-14 sm:pt-36">
+    <header className="border-b border-ink-700 bg-ink-900 pb-12 pt-44 sm:pb-14 sm:pt-48">
       <Container>
         {children}
         {eyebrow ? <Eyebrow className="mb-4">{eyebrow}</Eyebrow> : null}

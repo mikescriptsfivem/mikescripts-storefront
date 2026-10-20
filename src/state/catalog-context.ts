@@ -12,6 +12,11 @@ export interface CatalogContextValue {
   /** Custom pages created in the Tebex panel (visible ones only). */
   pages: TebexCmsPage[]
   error: TebexError | null
+  /**
+   * Set when Tebex could not be reached and the catalogue saved at build time is shown instead (ISO date).
+   * Prices may be out of date, and purchases go through the official Tebex store.
+   */
+  snapshotAt: string | null
   retry: () => void
 }
 

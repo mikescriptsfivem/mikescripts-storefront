@@ -66,6 +66,16 @@ export const site = {
     'Premium FiveM scripts and advanced systems, built for immersive gameplay and reliable server experiences.',
   links,
 
+  /**
+   * FiveM server shown in the bar at the top of every page. Set `address` to '' to hide the bar.
+   * `joinUrl` is optional: paste your cfx.re/join/… link to use it for the Connect button.
+   */
+  fivemServer: {
+    label: 'Play on our FiveM server',
+    address: '107.155.80.34:50986',
+    joinUrl: '',
+  },
+
   hero: {
     eyebrow: 'FiveM scripts & systems',
     headline: 'Engineered for your server.',
