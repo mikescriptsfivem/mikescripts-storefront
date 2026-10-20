@@ -12,7 +12,7 @@ import { pluralize } from '../lib/format'
 import { useCatalog } from '../state/catalog-context'
 
 export default function CatalogPage() {
-  const { status, catalog } = useCatalog()
+  const { status, catalog, snapshotAt } = useCatalog()
   const [params, setParams] = useSearchParams()
   const query = params.get('q') ?? ''
   const categorySlug = params.get('category')
@@ -38,7 +38,12 @@ export default function CatalogPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Catalogue" title={category ? category.name : 'All scripts'} description="Every MikeScripts release for FiveM. Prices are live from the official Tebex store." />
+      <PageHeader eyebrow="Catalogue" title={category ? category.name : 'All scripts'} description={
+          snapshotAt
+            ? 'Every MikeScripts release for FiveM. Prices are from the saved catalogue; the official Tebex store shows the current price.'
+            : 'Every MikeScripts release for FiveM. Prices are live from the official Tebex store.'
+        }
+      />
       <Container className="py-12 sm:py-16">
         {status === 'ready' && catalog ? (
           <>

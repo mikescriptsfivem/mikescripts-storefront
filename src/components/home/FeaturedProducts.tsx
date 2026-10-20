@@ -9,7 +9,7 @@ import { Container, SectionHeading } from '../ui/layout'
 import { Reveal } from '../ui/Reveal'
 
 export function FeaturedProducts() {
-  const { status, catalog } = useCatalog()
+  const { status, catalog, snapshotAt } = useCatalog()
   const products = useMemo(
     () => (catalog ? resolveFeatured(catalog, site.featuredProducts, site.featuredProductCount) : []),
     [catalog],
@@ -23,7 +23,11 @@ export function FeaturedProducts() {
           id="featured-heading"
           eyebrow="Featured scripts"
           title="Flagship releases"
-          description="Hand-picked systems from the MikeScripts catalogue, with live pricing from the official store."
+          description={
+            snapshotAt
+              ? 'Hand-picked systems from the MikeScripts catalogue. Prices are from the saved catalogue; Tebex shows the current price.'
+              : 'Hand-picked systems from the MikeScripts catalogue, with live pricing from the official store.'
+          }
           action={{ label: 'View all scripts', to: '/scripts' }}
         />
         <div className="mt-12">
