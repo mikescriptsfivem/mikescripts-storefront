@@ -1,0 +1,243 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Change the brand colours here and every component follows.
+ * Accent blue is sampled from the MikeScripts "MS" logo. Text colours meet WCAG AA on the ink backgrounds.
+ */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Barlow Condensed', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #08090b;
+  --color-ink-900: #0c0e11;
+  --color-ink-850: #111317;
+  --color-ink-800: #16191e;
+  --color-ink-700: #1f2329;
+  --color-ink-600: #2a2f37;
+  --color-ink-500: #3a414b;
+
+  --color-mist-50: #f5f7fa;
+  --color-mist-200: #d3d8df;
+  --color-mist-300: #b4bbc5;
+  --color-mist-400: #9aa1ab;
+  --color-mist-500: #808893;
+
+  --color-accent-300: #8cc4fa;
+  --color-accent-400: #4ea4f5;
+  --color-accent-500: #2b8cee;
+  --color-accent-600: #1a72d4;
+  --color-accent-700: #155bb0;
+
+  --color-success-400: #4ade80;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-slide-in: slide-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink-950);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-ink-950);
+    color: var(--color-mist-200);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgb(43 140 238 / 0.4);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-400);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  /* Scroll-triggered entrance used by <Reveal>. */
+  .reveal {
+    opacity: 0;
+  }
+  .reveal.is-visible {
+    animation: var(--animate-fade-up);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+    }
+    .reveal.is-visible {
+      animation: none;
+    }
+  }
+
+  /* Rich text from Tebex descriptions and custom pages. */
+  .prose-store {
+    color: var(--color-mist-300);
+    font-size: 0.975rem;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+  .prose-store > * + * {
+    margin-top: 1rem;
+  }
+  .prose-store :is(h1, h2, h3, h4) {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-top: 2rem;
+  }
+  .prose-store h1,
+  .prose-store h2 {
+    font-size: 1.6rem;
+  }
+  .prose-store h3 {
+    font-size: 1.3rem;
+  }
+  .prose-store h4 {
+    font-size: 1.1rem;
+  }
+  .prose-store strong {
+    color: #fff;
+    font-weight: 600;
+  }
+  .prose-store a {
+    color: var(--color-accent-400);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-store a:hover {
+    color: var(--color-accent-300);
+  }
+  .prose-store ul,
+  .prose-store ol {
+    padding-left: 1.25rem;
+  }
+  .prose-store ul {
+    list-style: disc;
+  }
+  .prose-store ol {
+    list-style: decimal;
+  }
+  .prose-store li + li {
+    margin-top: 0.35rem;
+  }
+  .prose-store li::marker {
+    color: var(--color-accent-500);
+  }
+  .prose-store img {
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-ink-700);
+    height: auto;
+    max-width: 100%;
+  }
+  .prose-store iframe {
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 0.375rem;
+    height: auto;
+    width: 100%;
+  }
+  .prose-store blockquote {
+    border-left: 2px solid var(--color-accent-500);
+    color: var(--color-mist-200);
+    padding-left: 1rem;
+  }
+  .prose-store hr {
+    border-color: var(--color-ink-700);
+    margin: 2rem 0;
+  }
+  .prose-store code {
+    background: var(--color-ink-800);
+    border: 1px solid var(--color-ink-700);
+    border-radius: 0.25rem;
+    color: var(--color-mist-50);
+    font-size: 0.85em;
+    padding: 0.1rem 0.35rem;
+  }
+  .prose-store pre {
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-ink-700);
+    border-radius: 0.375rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    padding: 1rem;
+    white-space: pre;
+  }
+  .prose-store pre code {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .prose-store hr + * {
+    margin-top: 2rem;
+  }
+  .prose-store table {
+    border-collapse: collapse;
+    display: block;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    width: 100%;
+  }
+  .prose-store :is(th, td) {
+    border: 1px solid var(--color-ink-700);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .prose-store th {
+    background: var(--color-ink-850);
+    color: #fff;
+  }
+}
