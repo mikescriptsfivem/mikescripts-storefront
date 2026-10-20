@@ -116,6 +116,19 @@ export interface TebexCmsPage {
   content: string
 }
 
+/** A sidebar module configured in the Tebex panel (Webstore → Sidebar). */
+export interface TebexSidebarModule {
+  id: number
+  type: string
+  data: unknown
+}
+
+/** A real recent buyer from the Recent Payments sidebar module (Tebex shares no product or time here). */
+export interface RecentCustomer {
+  username: string
+  avatarUrl: string | null
+}
+
 export interface TebexProblem {
   status?: number
   title?: string

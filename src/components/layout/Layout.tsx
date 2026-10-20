@@ -4,6 +4,7 @@ import { AuthChooser, BasketDrawer, BasketToaster } from '../basket/BasketOverla
 import { Spinner } from '../ui/icons'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { RecentCustomers } from './RecentCustomers'
 
 function PageLoader() {
   return (
@@ -27,6 +28,7 @@ export function Layout() {
       <BasketDrawer />
       <AuthChooser />
       <BasketToaster />
+      <RecentCustomers />
       <ScrollRestoration />
     </div>
   )

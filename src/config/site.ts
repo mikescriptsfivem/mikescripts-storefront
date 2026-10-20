@@ -76,6 +76,19 @@ export const site = {
     joinUrl: '',
   },
 
+  /**
+   * Corner pop-up with real recent buyers (Cfx.re name and avatar from the "Recent Payments" sidebar module in
+   * Tebex → Webstore → Sidebar). Tebex shares no product or time there, so none is shown. Set enabled: false to turn off.
+   */
+  recentCustomers: {
+    enabled: true,
+    /** Buyers shown per visit. */
+    max: 3,
+    firstDelaySeconds: 10,
+    visibleSeconds: 6,
+    intervalSeconds: 20,
+  },
+
   hero: {
     eyebrow: 'FiveM scripts & systems',
     headline: 'Engineered for your server.',

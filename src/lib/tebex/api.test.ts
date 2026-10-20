@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { makeBasket } from '../test-fixtures'
-import { createTebexApi, getCheckoutUrl, isBasketAuthorized, isTebexUrl, parseAuthMethods } from './api'
+import { createTebexApi, getCheckoutUrl, isBasketAuthorized, isTebexUrl, parseAuthMethods, recentCustomersFromSidebar } from './api'
 
 afterEach(() => vi.unstubAllGlobals())
 
@@ -70,6 +70,37 @@ describe('parseAuthMethods', () => {
 
   it('ignores non-HTTPS login URLs', () => {
     expect(parseAuthMethods([{ name: 'Bad', url: 'javascript:alert(1)' }, { name: 'Http', url: 'http://x.test' }])).toEqual([])
+  })
+})
+
+describe('recentCustomersFromSidebar', () => {
+  it('reads name and avatar from the Recent Payments module (shape of the live MikeScripts sidebar)', () => {
+    const modules = [
+      { id: 1, type: 'textbox', data: { header: 'Modules', text: '…' } },
+      { id: 2, type: 'top_customer', data: null },
+      {
+        id: 3,
+        type: 'recent_payments',
+        data: {
+          header: 'Recent Payments',
+          payments: [
+            { username: 'JesseMel', username_id: '9814333', avatar_url: 'https://forum.cfx.re/user_avatar/jessemel.png' },
+            { username: '  ', username_id: '1', avatar_url: 'https://x.test/a.png' },
+            { username: 'NoAvatar', username_id: '2', avatar_url: 'http://insecure.test/a.png' },
+          ],
+        },
+      },
+    ]
+    expect(recentCustomersFromSidebar(modules)).toEqual([
+      { username: 'JesseMel', avatarUrl: 'https://forum.cfx.re/user_avatar/jessemel.png' },
+      { username: 'NoAvatar', avatarUrl: null },
+    ])
+  })
+
+  it('returns nothing when the module is missing or malformed', () => {
+    expect(recentCustomersFromSidebar([{ id: 1, type: 'textbox', data: {} }])).toEqual([])
+    expect(recentCustomersFromSidebar(null)).toEqual([])
+    expect(recentCustomersFromSidebar([{ id: 3, type: 'recent_payments', data: null }])).toEqual([])
   })
 })
 

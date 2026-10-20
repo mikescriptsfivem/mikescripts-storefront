@@ -107,7 +107,7 @@ You never need to touch components for day-to-day changes. Everything lives in `
 
 | File | What it controls |
 | --- | --- |
-| `src/config/site.ts` | Links (Discord, store, docs, refund policy), hero text and image, featured products, featured release, storefront categories, About text, reviews, FAQ |
+| `src/config/site.ts` | Links (Discord, store, docs, refund policy), FiveM server bar, recent-customer pop-up, hero text and image, featured products, featured release, storefront categories, About text, reviews, FAQ |
 | `src/config/products.ts` | Extra product content Tebex doesn’t store: galleries, features, requirements, frameworks, changelog, docs links |
 | `src/config/media.ts` | Image manifest (all local artwork, by id) |
 | `src/config/showcase.ts` | Showcase page galleries |
@@ -145,6 +145,15 @@ Descriptions come straight from Tebex. Several of yours contain Markdown typed i
 - **MS Flight - Air Traffic Control Tower:** the text still contains the placeholder “Support on Discord: [DISCORD LINK]”.
 - **MS_HwyWrk:** the Discord link text reads “[ Discord link]”.
 - Your listings use three different Discord invites (`nEzMzNUqnr`, `4FSwRc4v3S`, `bBbZk5HzPK`). All three are permanent and go to the MikeScripts server, so nothing is broken, but one invite everywhere is tidier.
+
+### FiveM server bar and recent customers
+
+- **Server bar:** `fivemServer` in `site.ts` shows `connect <address>` at the top of every page with **Copy** and **Connect** (launches FiveM) buttons. Add your `cfx.re/join/…` link as `joinUrl` if you have one; set `address: ''` to hide the bar.
+- **Recent customers:** `recentCustomers` shows real recent buyers (Cfx.re name and avatar) from the **Recent Payments** module in Tebex → Webstore → Sidebar, a few per visit. Tebex shares no product or time there, so none is shown. Set `enabled: false` to turn it off.
+
+### When a visitor's browser can't reach Tebex
+
+Some setups block `headless.tebex.io` (VPNs, Edge “Strict” tracking prevention, security software). Every build saves the live catalogue as `catalog-snapshot.json`, so those visitors still see every product with a notice, and **Buy on Tebex** opens the product on your official store. The site switches back to live data as soon as Tebex is reachable.
 
 ### Custom pages from Tebex
 

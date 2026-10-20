@@ -1,5 +1,5 @@
 import { TebexError, tebexRequest } from './client'
-import type { TebexAuthMethod, TebexBasket, TebexCategory, TebexCmsPage, TebexWebstore } from './types'
+import type { RecentCustomer, TebexAuthMethod, TebexBasket, TebexCategory, TebexCmsPage, TebexSidebarModule, TebexWebstore } from './types'
 
 /**
  * Tebex Headless API endpoints used by the storefront.
@@ -45,6 +45,20 @@ export function parseAuthMethods(payload: unknown): TebexAuthMethod[] {
   return list.flat(2).filter(isAuthMethod)
 }
 
+/** Recent buyers from the "Recent Payments" sidebar module (name and avatar only). */
+export function recentCustomersFromSidebar(modules: unknown): RecentCustomer[] {
+  if (!Array.isArray(modules)) return []
+  const module = modules.find((item): item is TebexSidebarModule => typeof item === 'object' && item !== null && (item as TebexSidebarModule).type === 'recent_payments')
+  const payments = (module?.data as { payments?: unknown } | null | undefined)?.payments
+  if (!Array.isArray(payments)) return []
+  return payments
+    .filter((payment): payment is { username: string; avatar_url?: unknown } => typeof payment?.username === 'string' && payment.username.trim() !== '')
+    .map((payment) => ({
+      username: payment.username.trim(),
+      avatarUrl: typeof payment.avatar_url === 'string' && payment.avatar_url.startsWith('https://') ? payment.avatar_url : null,
+    }))
+}
+
 /** True when the URL is an HTTPS page on tebex.io (for example https://pay.tebex.io/…). */
 export function isTebexUrl(value: string): boolean {
   try {
@@ -82,6 +96,10 @@ export function createTebexApi(publicToken: string) {
 
     getCategoriesWithPackages(signal?: AbortSignal) {
       return tebexRequest<DataEnvelope<TebexCategory[]>>(account('/categories?includePackages=1'), { signal }).then(unwrap)
+    },
+
+    getSidebar(signal?: AbortSignal) {
+      return tebexRequest<DataEnvelope<TebexSidebarModule[]>>(account('/sidebar'), { signal }).then(unwrap)
     },
 
     getPages(signal?: AbortSignal) {
