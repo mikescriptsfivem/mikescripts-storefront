@@ -1,6 +1,17 @@
 import type { StoreCategory } from '../lib/catalog'
 import type { MediaId } from './media'
 
+/** One card in the homepage hero rotator. Live Tebex prices replace `priceLabel` when the catalogue loads. */
+export interface HeroSlide {
+  productKey: string
+  slug: string
+  title: string
+  category: string
+  text: string
+  priceLabel: string
+  image?: MediaId
+}
+
 /**
  * Site-wide settings. This is the main file to edit for links, homepage content and FAQ answers.
  * Text fields support [link text](https://example.com) links and `inline code`.
@@ -22,8 +33,8 @@ export interface SiteLinks {
 const links: SiteLinks = {
   /** Official Tebex store (fallback when the live catalogue cannot load). */
   store: 'https://mikescripts.tebex.io',
-  /** Discord invite. Empty ('') hides all Discord buttons. (Permanent invite to the MikeScripts server.) */
-  discord: 'https://discord.gg/nEzMzNUqnr',
+  /** Discord invite. Empty ('') hides all Discord buttons. */
+  discord: 'https://discord.gg/CY4sPAfy6g',
   /** Optional external documentation site. The built-in /docs pages are always available. */
   documentation: '',
   /** Optional: your own refund policy page. Leave empty to rely on Tebex's checkout terms. */
@@ -90,10 +101,47 @@ export const site = {
   },
 
   hero: {
-    eyebrow: 'FiveM scripts & systems',
-    headline: 'Engineered for your server.',
-    text: 'Premium FiveM scripts and advanced systems, built for immersive gameplay and reliable server experiences.',
-    image: 'ms8000/night-ramp' satisfies MediaId as MediaId,
+    eyebrow: 'Aviation · Recovery · Air support',
+    headline: 'Premium systems.\nReal immersion.',
+    text: 'Catalogue systems for FiveM: flight careers and ATC, heavy recovery, air support, and walk-in aircraft — built for immersive roleplay and reliable servers.',
+    image: 'hero/wrecker' satisfies MediaId as MediaId,
+    slides: [
+      {
+        productKey: 'ms-flightsim',
+        slug: 'ms-flightsim',
+        title: 'All-In-One Flight Simulator',
+        category: 'Aviation',
+        text: 'Turn flying into a full roleplay career. Pilot training, missions, HUD and ATC — one drop-in resource.',
+        priceLabel: '$109.99',
+        image: 'ms100/front34',
+      },
+      {
+        productKey: 'ms-hwywrk',
+        slug: 'ms-hwywrk',
+        title: 'MS_HwyWrk Heavy Rotator Wrecker',
+        category: 'Vehicle systems',
+        text: 'Working boom, winch hooks, wheel-lift and scene lighting — heavy recovery built for serious highway RP.',
+        priceLabel: '$49.99',
+        image: 'hero/wrecker',
+      },
+      {
+        productKey: 'ms8000',
+        slug: 'ms8000',
+        title: 'MS8000 — Business Jet',
+        category: 'Aviation',
+        text: 'Ultra-long-range luxury business jet with a fully walkable cabin, six liveries and a printed glass cockpit.',
+        priceLabel: '$49.99',
+        image: 'ms8000/studio-hero',
+      },
+      {
+        productKey: 'ms-atc-tower',
+        slug: 'ms-atc-tower',
+        title: 'ATC Tower LSIA',
+        category: 'Aviation',
+        text: 'Walk-in LSIA tower by runway 12R: lobby, lift shaft and glazed cab for catalogue ATC duty.',
+        priceLabel: 'Free',
+      },
+    ] satisfies HeroSlide[] as HeroSlide[],
   },
 
   /**

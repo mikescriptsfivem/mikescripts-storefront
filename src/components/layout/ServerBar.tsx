@@ -44,7 +44,7 @@ export function ServerBar() {
             {copied ? <CheckIcon size={14} className="text-success-400" /> : <CopyIcon size={14} />}
             <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
           </button>
-          <a href={connectHref} className="flex h-7 items-center gap-1.5 rounded bg-accent-600 px-3 font-semibold text-white transition-colors hover:bg-accent-700">
+          <a href={connectHref} className="flex h-7 items-center gap-1.5 rounded bg-accent-400 px-3 font-bold text-ink-950 transition-colors hover:bg-accent-500">
             <PlayIcon size={13} />
             Connect
           </a>

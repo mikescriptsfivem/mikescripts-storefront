@@ -2,7 +2,7 @@
 
 /*
  * Design tokens. Change the brand colours here and every component follows.
- * Accent blue is sampled from the MikeScripts "MS" logo. Text colours meet WCAG AA on the ink backgrounds.
+ * Accent orange is the MikeScripts brand colour (#f97316). Text colours meet WCAG AA on the ink backgrounds.
  */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -22,11 +22,11 @@
   --color-mist-400: #9aa1ab;
   --color-mist-500: #808893;
 
-  --color-accent-300: #8cc4fa;
-  --color-accent-400: #4ea4f5;
-  --color-accent-500: #2b8cee;
-  --color-accent-600: #1a72d4;
-  --color-accent-700: #155bb0;
+  --color-accent-300: #fb923c;
+  --color-accent-400: #f97316;
+  --color-accent-500: #ea580c;
+  --color-accent-600: #c2410c;
+  --color-accent-700: #9a3412;
 
   --color-success-400: #4ade80;
   --color-danger-400: #f87171;
@@ -35,6 +35,7 @@
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.25s ease-out both;
   --animate-slide-in: slide-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-feature-progress: feature-progress 4s linear forwards;
 
   @keyframes fade-up {
     from {
@@ -62,6 +63,14 @@
       transform: none;
     }
   }
+  @keyframes feature-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
 }
 
 @layer base {
@@ -83,7 +92,7 @@
   }
 
   ::selection {
-    background: rgb(43 140 238 / 0.4);
+    background: rgb(234 88 12 / 0.4);
     color: #fff;
   }
 

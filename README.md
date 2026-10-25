@@ -30,7 +30,7 @@ More detail: [docs/TEBEX-INTEGRATION.md](docs/TEBEX-INTEGRATION.md) · [docs/ASS
 | Value | Where it goes | Required? |
 | --- | --- | --- |
 | **Tebex public token** | `VITE_TEBEX_PUBLIC_TOKEN` (`.env.local` locally, a GitHub repository *variable* for deployment) | **Yes.** Already in `.env.local` on this computer; add it as a GitHub variable when you deploy (section 4). Without it the site shows a “catalogue not connected” notice. |
-| Discord invite URL | `links.discord` in `src/config/site.ts` | Set to `https://discord.gg/nEzMzNUqnr` (the permanent MikeScripts invite from your MS_Fire listing). Set it to `''` to hide Discord buttons. |
+| Discord invite URL | `links.discord` in `src/config/site.ts` | Set to `https://discord.gg/CY4sPAfy6g`. Set it to `''` to hide Discord buttons. |
 | Your own refund policy URL | `links.refundPolicy` in `src/config/site.ts` | Optional. Otherwise the FAQ points to Tebex’s checkout terms. |
 | Genuine customer reviews | `reviews` in `src/config/site.ts` | Optional. The reviews section stays hidden while the list is empty. |
 

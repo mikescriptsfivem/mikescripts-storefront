@@ -23,6 +23,14 @@ const HERO = [800, 1600, 2400] as const
 const render = (alt: string, widths: readonly number[] = GALLERY): MediaAsset => ({ alt, widths, width: 2560, height: 1440 })
 
 export const media = {
+  // Homepage hero. A wrecker still — not an aircraft.
+  'hero/wrecker': {
+    alt: 'HwyWrk heavy rotator wrecker on a night highway',
+    file: 'media/hero/wrecker.jpg',
+    width: 2560,
+    height: 1440,
+  },
+
   // MS8000 (MikeScripts release gallery)
   'ms8000/studio-hero': render('MS8000 business jet in a dark studio, white and gold livery', HERO),
   'ms8000/studio-rear': render('MS8000 from the rear quarter in the Midnight Sapphire livery'),
