@@ -10,7 +10,7 @@ Every image the site ships, where it came from, and what is still missing. Image
 | `public/brand/favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` | Same logo on the site background colour |
 | `public/brand/og-image.jpg` (1200×630 share image) | MS8000 studio hero render + logo |
 
-The header wordmark (“MikeScripts”) is set in type rather than an image, so it stays sharp at every size. The colour accent (`#2b8cee` family) is sampled from the blue “S” in the logo.
+The header wordmark (“MikeScripts”) is set in type rather than an image, so it stays sharp at every size. The colour accent (`#f97316`) is the MikeScripts brand orange, defined in `src/styles/index.css`.
 
 ## Product artwork (`public/media/`)
 
