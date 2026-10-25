@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router'
+import { NavLink } from 'react-router'
 import { site } from '../../config/site'
 import { useBasket } from '../../state/basket-context'
 import { Container } from '../ui/layout'
@@ -75,17 +75,7 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
   }`
 
 export function Header() {
-  const location = useLocation()
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const transparentAtTop = location.pathname === '/'
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -94,14 +84,11 @@ export function Header() {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
-  const solid = scrolled || menuOpen || !transparentAtTop
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-        solid ? 'border-ink-700/80 bg-ink-950/90 backdrop-blur-md' : 'border-transparent bg-transparent'
-      }`}
+      className="fixed inset-x-0 top-0 z-50 border-b border-ink-700/80 bg-ink-950/90 backdrop-blur-md"
     >
       <a
         href="#main"

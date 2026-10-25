@@ -6,7 +6,7 @@ const base =
   'inline-flex max-w-full select-none items-center justify-center gap-2 rounded-md text-center font-semibold leading-tight tracking-wide transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-55 aria-disabled:pointer-events-none aria-disabled:opacity-55'
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-accent-600 text-white hover:bg-accent-700 active:bg-accent-700',
+  primary: 'bg-accent-400 text-ink-950 shadow-[0_10px_30px_rgba(249,115,22,0.22)] hover:bg-accent-500 active:bg-accent-600 active:text-white',
   secondary: 'border border-ink-500 bg-ink-950/40 text-mist-50 backdrop-blur hover:border-mist-400 hover:bg-white/5',
   ghost: 'text-mist-300 hover:bg-white/5 hover:text-white',
 }

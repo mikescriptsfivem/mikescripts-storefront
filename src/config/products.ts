@@ -190,6 +190,7 @@ export const productContent: ProductContent[] = [
     slug: 'ms-hwywrk',
     shortName: 'MS_HwyWrk Heavy Rotator Wrecker',
     tagline: 'A heavy rotator tow truck with working boom, winches, wheel-lift and scene lighting.',
+    heroImage: 'hero/wrecker',
     requirements: {
       required: ['FiveM server with OneSync'],
       optional: ['ESX, QBCore or Qbox (only for job permissions)'],
